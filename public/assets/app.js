@@ -45,6 +45,7 @@
 
   const cleanPhone = value => String(value || '').replace(/[^+\d]/g, '');
   if (config.phone) {
+    root.classList.add('has-mobile-call');
     document.querySelectorAll('[data-phone-link]').forEach(link => {
       link.href = `tel:${cleanPhone(config.phone)}`;
       link.classList.remove('is-hidden');
@@ -69,6 +70,10 @@
 
   const form = document.querySelector('#inquiry-form');
   if (!form) return;
+  const formEndpoint = String(config.formEndpoint || '').trim();
+  const formEndpointConfigured = /^https:\/\/formsubmit\.co\/ajax\/[^/]+$/i.test(formEndpoint)
+    && !formEndpoint.includes('your-email@example.com');
+  if (formEndpointConfigured) form.action = formEndpoint;
   form.elements.startedAt.value = Date.now();
   const fileInput = form.elements.photo;
   const fileName = form.querySelector('[data-file-name]');
@@ -91,15 +96,11 @@
     return valid;
   };
 
-  const fileToDataUrl = file => new Promise((resolve, reject) => {
-    if (!file) return resolve(null);
-    if (file.size > 5 * 1024 * 1024) return reject(new Error('Datoteka je prevelika. Najveća dopuštena veličina je 5 MB.'));
-    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) return reject(new Error('Odaberite fotografiju u JPG, PNG ili WebP formatu.'));
-    const reader = new FileReader();
-    reader.onload = () => resolve({ name: file.name, data: reader.result });
-    reader.onerror = () => reject(new Error('Fotografiju nije moguće pročitati.'));
-    reader.readAsDataURL(file);
-  });
+  const validateFile = file => {
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) throw new Error('Datoteka je prevelika. Najveća dopuštena veličina je 5 MB.');
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) throw new Error('Odaberite fotografiju u JPG, PNG ili WebP formatu.');
+  };
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
@@ -112,22 +113,25 @@
       return;
     }
     form.classList.add('busy');
+    form.setAttribute('aria-busy', 'true');
     status.textContent = 'Šaljemo upit…';
     try {
-      const payload = {
-        name: form.elements.name.value,
-        contact: form.elements.contact.value,
-        location: form.elements.location.value,
-        description: form.elements.description.value,
-        consent: form.elements.consent.checked,
-        website: form.elements.website.value,
-        startedAt: form.elements.startedAt.value,
-        photo: await fileToDataUrl(fileInput.files[0])
-      };
-      const response = await fetch('/api/inquiries', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-      const result = await response.json();
+      if (!formEndpointConfigured) throw new Error('Obrazac još nije povezan s adresom e-pošte. Kontaktirajte nas izravno.');
+      validateFile(fileInput.files[0]);
+      const payload = new FormData(form);
+      payload.delete('startedAt');
+      payload.set('_subject', 'Novi upit sa stranice LIBRA');
+      payload.set('_template', 'table');
+      payload.set('_url', location.href);
+      payload.set('Privola', 'Prihvaćena');
+      const response = await fetch(formEndpoint, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: payload
+      });
+      const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.message || 'Upit nije poslan.');
-      status.textContent = result.message;
+      status.textContent = 'Hvala! Vaš upit je poslan. Javit ćemo vam se u vezi s radovima.';
       status.classList.add('success');
       form.reset();
       fileName.textContent = 'Odaberite fotografiju';
@@ -137,6 +141,7 @@
       status.classList.add('error');
     } finally {
       form.classList.remove('busy');
+      form.removeAttribute('aria-busy');
     }
   });
 })();

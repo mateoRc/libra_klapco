@@ -1,67 +1,80 @@
 # LIBRA — bager iskopi Labin i Istra
 
-Production-ready Croatian website for **LIBRA, obrt za usluge u građevinarstvu**. The app uses a dependency-free Node.js server, responsive static frontend, validated inquiry API and Docker Compose.
+Static Croatian presentation website for **LIBRA, obrt za usluge u građevinarstvu**. The production site is designed for Cloudflare Pages and contains no application server, database, or persistent storage.
 
-## Run locally
+## Run locally with Docker
+
+Build and serve the static site through Nginx:
 
 ```bash
 docker compose up --build
 ```
 
-Open [http://localhost](http://localhost). Stop with `docker compose down`. Inquiry data remains in the named `libra_inquiries` volume.
+Open `http://localhost:8090`. Use `LIBRA_PORT` to choose another host port, for example `LIBRA_PORT=8091 docker compose up --build`.
 
-For a direct non-Docker run (Node.js 18+):
+Stop it with:
 
 ```bash
-npm start
+docker compose down
 ```
 
-The direct server runs at `http://localhost:3000`.
+Docker is only a local/portable static web server. It does not run an application backend or store form submissions.
 
-## Business and contact information
+For a lightweight preview without Docker, serve the `public` directory with any static file server:
 
-Verified legal data is centralized in [`config/business.js`](config/business.js). Contact values should be provided through environment variables. Copy `.env.example` to `.env` and replace:
+```bash
+npx serve public
+```
 
-- `PHONE_NUMBER_TO_CONFIRM`
-- `EMAIL_TO_CONFIRM`
-- `WHATSAPP_TO_CONFIRM`
-- `YOUR_DOMAIN_TO_CONFIRM`
+Then open the local URL printed by the command.
 
-Unconfirmed phone, email and WhatsApp values are never sent to or displayed in the browser. Their corresponding buttons remain hidden. `PUBLIC_SITE_URL` populates canonical, Open Graph, sitemap and robots URLs at response time.
+## Contact and inquiry form
 
-## Inquiry form
+Public runtime values are configured in [`public/config.js`](public/config.js):
 
-Validated inquiries are saved as newline-delimited JSON in `/data/inquiries.jsonl` inside the persistent Docker volume. Optional images are stored under `/data/uploads`. The endpoint includes a honeypot, minimum-submit-time check, request-size limit, field validation, IP hashing and in-memory rate limiting.
+- `phone` — public phone number, preferably in international format
+- `email` — public business email address
+- `whatsapp` — WhatsApp number in international format
+- `formEndpoint` — FormSubmit AJAX endpoint that forwards form submissions by email
 
-For production notifications, set `CONTACT_WEBHOOK_URL` to an HTTPS endpoint that accepts JSON. Local storage remains the source of truth if webhook delivery fails. Protect and back up the Docker volume, set a retention policy, and remove old inquiries when no longer needed.
+Replace the example endpoint with the real recipient address:
+
+```js
+formEndpoint: 'https://formsubmit.co/ajax/office@example.com'
+```
+
+FormSubmit sends an activation email after the first submission. The recipient must confirm that message before subsequent inquiries are delivered. The static site sends the name, contact, location, work description, consent, and optional image directly to FormSubmit; Cloudflare does not store inquiry data.
+
+## Deploy to Cloudflare Pages
+
+Connect the GitHub repository in **Workers & Pages → Create application → Pages → Connect to Git** and use:
+
+- Framework preset: `None`
+- Production branch: `main`
+- Build command: leave blank
+- Build output directory: `public`
+- Root directory: `/`
+
+After the first successful deployment, open **Custom domains → Set up a domain** and enter `libra.mateolabs.dev`. If `mateolabs.dev` is already managed by the same Cloudflare account, Cloudflare creates the DNS record automatically.
+
+Every push to `main` triggers a new production deployment.
 
 ## Content and images
 
-- Homepage content: `public/index.html`
+- Homepage: `public/index.html`
 - Layout and visual system: `public/assets/styles.css`
-- Interactions and form handling: `public/assets/app.js`
-- SVG logo set: `public/assets/logo-*.svg` and `public/favicon.svg`
-- Generated atmospheric images: `public/assets/images/`
+- Interactions and email form: `public/assets/app.js`
+- Public contact/form configuration: `public/config.js`
+- Cloudflare response headers: `public/_headers`
+- SVG logos and favicon: `public/assets/logo-*.svg`, `public/favicon.svg`
+- Responsive site images: `public/assets/images/`
 
-Generated images are clearly labeled as illustrative and are not presented as completed LIBRA projects. Replace them with approved real project photographs using the same filenames, or update the paths and intrinsic dimensions in `public/index.html`.
+Generated images are labeled as illustrative and should eventually be replaced with approved project photographs.
 
-## Details still requiring confirmation
-
-- Public telephone number
-- Public email address
-- WhatsApp number and whether WhatsApp should be offered
-- Final production domain
-- Production inquiry webhook / notification workflow
-- Confirmation that every listed potential service is offered; the public copy currently states that final scope is confirmed after site assessment
-- Approved real project photographs, if available
-
-## Checks
+## Check before publishing
 
 ```bash
 npm run check
-docker compose config
-docker compose up --build -d
-curl http://localhost/health
 ```
 
-The site has keyboard focus states, semantic landmarks and labels, a skip link, reduced-motion handling, a one-session loader, responsive layouts from 320 px, SEO metadata, JSON-LD, `robots.txt`, sitemap, privacy page and a custom 404.
+Also confirm the public phone, email, WhatsApp number, FormSubmit recipient, listed services, and approved project photographs.

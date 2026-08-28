@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: {{SITE_URL}}/sitemap.xml
+Sitemap: https://libra.mateolabs.dev/sitemap.xml
