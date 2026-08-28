@@ -32,6 +32,19 @@
     genericError: 'Upit trenutačno nije moguće poslati.'
   };
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pageProgress = document.querySelector('[data-page-progress]');
+  pageProgress?.classList.add('loading');
+
+  const finishPageLoad = () => {
+    pageProgress?.classList.remove('loading');
+    pageProgress?.classList.add('complete');
+    setTimeout(() => {
+      pageProgress?.classList.remove('complete');
+      pageProgress?.classList.add('ready');
+    }, reducedMotion ? 0 : 420);
+  };
+  if (document.readyState === 'complete') finishPageLoad();
+  else addEventListener('load', finishPageLoad, { once: true });
 
   if (root.classList.contains('intro-on')) {
     try { sessionStorage.setItem('libra-intro', '1'); } catch (_) {}
@@ -39,30 +52,47 @@
   }
 
   const header = document.querySelector('[data-header]');
-  const backTop = document.querySelector('.back-top');
+  const backTop = document.querySelector('[data-back-top]');
   const updateScrollUi = () => {
     header?.classList.toggle('compact', scrollY > 36);
     const showBackTop = scrollY > 420;
     backTop?.classList.toggle('visible', showBackTop);
     backTop?.setAttribute('aria-hidden', String(!showBackTop));
     if (backTop) backTop.tabIndex = showBackTop ? 0 : -1;
+    const scrollable = document.documentElement.scrollHeight - innerHeight;
+    const progress = scrollable > 0 ? Math.min(1, scrollY / scrollable) : 0;
+    pageProgress?.style.setProperty('--scroll-progress', progress.toFixed(4));
   };
   updateScrollUi();
   addEventListener('scroll', updateScrollUi, { passive: true });
+  backTop?.addEventListener('click', () => {
+    scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+  });
 
   const menuButton = document.querySelector('.menu-toggle');
   const mobileMenu = document.querySelector('.mobile-nav');
   const closeMenu = () => {
     mobileMenu?.classList.remove('open');
     menuButton?.setAttribute('aria-expanded', 'false');
+    root.classList.remove('menu-open');
   };
   menuButton?.addEventListener('click', () => {
     const open = !mobileMenu.classList.contains('open');
     mobileMenu.classList.toggle('open', open);
     menuButton.setAttribute('aria-expanded', String(open));
+    root.classList.toggle('menu-open', open);
   });
   mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-  addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+  addEventListener('keydown', event => {
+    if (event.key === 'Escape' && mobileMenu?.classList.contains('open')) {
+      closeMenu();
+      menuButton?.focus();
+    }
+  });
+  addEventListener('click', event => {
+    if (mobileMenu?.classList.contains('open') && !header?.contains(event.target)) closeMenu();
+  });
+  addEventListener('resize', () => { if (innerWidth > 1050) closeMenu(); }, { passive: true });
 
   if ('IntersectionObserver' in window && !reducedMotion) {
     const observer = new IntersectionObserver(entries => {
@@ -115,7 +145,12 @@
   fileInput?.addEventListener('change', () => {
     fileName.textContent = fileInput.files[0]?.name || copy.choosePhoto;
   });
-  form.querySelector('.file-ui')?.addEventListener('click', () => fileInput.click());
+  form.querySelector('.file-ui')?.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      fileInput.click();
+    }
+  });
 
   const validate = () => {
     let valid = true;

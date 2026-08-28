@@ -20,6 +20,8 @@
   <meta property="og:image" content="https://libra.mateolabs.dev/assets/images/bager-iskopi-labin-hero.png">
   <meta property="og:image:alt" content="Ilustrativni prikaz bagera na istarskom terenu">
   <link rel="icon" href="/assets/libra_logo.png" type="image/png">
+  <link rel="preload" href="/assets/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/styles.css">
   <script>try{if(!sessionStorage.getItem('libra-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-on')}catch(e){}</script>
   <script type="application/ld+json">
@@ -44,6 +46,7 @@
   </script>
 </head>
 <body>
+  <div class="page-progress" data-page-progress aria-hidden="true"><i></i></div>
   <a class="skip-link" href="#sadrzaj">Preskoči na sadržaj</a>
 
   <div class="intro" aria-hidden="true">
@@ -214,7 +217,7 @@
           <div class="field"><label for="contact-field">Telefon ili e-pošta <span>*</span></label><input id="contact-field" name="contact" type="text" autocomplete="tel" required minlength="5"><small>Unesite broj telefona ili adresu e-pošte.</small></div>
           <div class="field"><label for="location">Lokacija radova <span>*</span></label><input id="location" name="location" type="text" autocomplete="address-level2" required minlength="2"><small>Unesite mjesto ili adresu radova.</small></div>
           <div class="field field-wide"><label for="description">Opis radova <span>*</span></label><textarea id="description" name="description" rows="5" required minlength="10" placeholder="Vrsta iskopa, okvirne dimenzije, pristup terenu…"></textarea><small>Opišite planirane radove u barem nekoliko riječi.</small></div>
-          <div class="field field-wide file-field"><label for="photo">Fotografija terena <span>neobavezno, do 5 MB</span></label><input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp"><div class="file-ui"><span data-file-name>Odaberite fotografiju</span><b>Pregledaj</b></div><small>Podržani formati: JPG, PNG i WebP.</small></div>
+          <div class="field field-wide file-field"><label for="photo">Fotografija terena <span>neobavezno, do 5 MB</span></label><input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp"><label class="file-ui" for="photo" tabindex="0" role="button"><span data-file-name>Odaberite fotografiju</span><b>Pregledaj</b></label><small>Podržani formati: JPG, PNG i WebP.</small></div>
           <label class="consent field-wide"><input type="checkbox" name="consent" required><span>Prihvaćam obradu podataka isključivo radi odgovora na ovaj upit. <a href="/privatnost">Pravila privatnosti</a>. *</span></label>
           <div class="form-footer field-wide"><button class="button button-dark" type="submit"><span>Pošaljite upit</span><svg><use href="#i-arrow"/></svg></button><p class="form-status" role="status" aria-live="polite"></p></div>
         </form>
@@ -226,7 +229,6 @@
     <div class="shell footer-top">
       <div class="footer-brand"><span class="footer-brand-mark"><img src="/assets/libra_logo.png" width="1672" height="941" alt=""></span><strong>LIBRA</strong></div>
       <p>Precizan iskop.<br>Pouzdan teren za ono što slijedi.</p>
-      <a class="back-top" href="#vrh" aria-label="Povratak na vrh stranice" aria-hidden="true" tabindex="-1">Na vrh <span aria-hidden="true">↑</span></a>
     </div>
     <div class="shell footer-bottom">
       <p>LIBRA, obrt za usluge u građevinarstvu · vl. Alessandro Klapčić · Rudarska 10, Labin</p>
@@ -236,6 +238,7 @@
   </footer>
 
   <a class="mobile-call is-hidden" data-phone-link href="#" aria-label="Nazovite LIBRA"><span>Nazovite</span><svg><use href="#i-arrow"/></svg></a>
+  <button class="back-top" data-back-top type="button" aria-label="Povratak na vrh stranice" aria-hidden="true" tabindex="-1"><span>Na vrh</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
   <script src="/config.js"></script>
   <script src="/assets/app.js" defer></script>
 </body>
