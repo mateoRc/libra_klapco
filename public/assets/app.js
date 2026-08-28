@@ -39,9 +39,16 @@
   }
 
   const header = document.querySelector('[data-header]');
-  const setHeader = () => header?.classList.toggle('compact', scrollY > 36);
-  setHeader();
-  addEventListener('scroll', setHeader, { passive: true });
+  const backTop = document.querySelector('.back-top');
+  const updateScrollUi = () => {
+    header?.classList.toggle('compact', scrollY > 36);
+    const showBackTop = scrollY > 420;
+    backTop?.classList.toggle('visible', showBackTop);
+    backTop?.setAttribute('aria-hidden', String(!showBackTop));
+    if (backTop) backTop.tabIndex = showBackTop ? 0 : -1;
+  };
+  updateScrollUi();
+  addEventListener('scroll', updateScrollUi, { passive: true });
 
   const menuButton = document.querySelector('.menu-toggle');
   const mobileMenu = document.querySelector('.mobile-nav');

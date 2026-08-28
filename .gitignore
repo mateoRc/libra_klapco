@@ -1,2 +1,10 @@
 node_modules/
+.preview/
+.wrangler/
+.dev.vars
+.env
+.env.*
+!.env.example
 *.log
+.DS_Store
+Thumbs.db
