@@ -47,9 +47,15 @@
   else addEventListener('load', finishPageLoad, { once: true });
 
   if (root.classList.contains('intro-on')) {
-    try { sessionStorage.setItem('libra-intro', '1'); } catch (_) {}
     setTimeout(() => root.classList.remove('intro-on'), 2300);
   }
+
+  document.querySelectorAll('.site-header .brand, .language-switch a').forEach(link => {
+    link.addEventListener('click', event => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      try { sessionStorage.setItem('libra-skip-intro', '1'); } catch (_) {}
+    });
+  });
 
   const header = document.querySelector('[data-header]');
   const backTop = document.querySelector('[data-back-top]');

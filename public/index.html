@@ -23,7 +23,7 @@
   <link rel="preload" href="/assets/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/styles.css">
-  <script>try{if(!sessionStorage.getItem('libra-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-on')}catch(e){}</script>
+  <script>try{const skip=sessionStorage.getItem('libra-skip-intro')==='1';sessionStorage.removeItem('libra-skip-intro');if(!skip&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-on')}catch(e){if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-on')}</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -64,7 +64,7 @@
     <symbol id="i-channel" viewBox="0 0 64 64"><path d="M14 9v32c0 8 6 14 14 14h27M14 22h10M14 34h10M41 55v-9M51 55v-9"/></symbol>
     <symbol id="i-level" viewBox="0 0 64 64"><path d="M7 21h50v24H7V21Z"/><circle cx="32" cy="33" r="7"/><path d="M11 33h14M39 33h14"/></symbol>
     <symbol id="i-clear" viewBox="0 0 64 64"><path d="M27 44V31M18 55h18M27 44l-8 11M27 44l8 11M27 9c-7 0-12 6-11 13-6 2-8 9-4 14 4 5 11 5 15 1 4 4 11 4 15-1 4-6 1-13-5-14 1-7-4-13-10-13Z"/></symbol>
-    <symbol id="i-load" viewBox="0 0 64 64"><path d="M7 45h7l3-14h27l8 7h5v11H7v-4ZM19 31l5-16 22 7-4 9"/><circle cx="18" cy="50" r="5"/><circle cx="49" cy="50" r="5"/></symbol>
+    <symbol id="i-load" viewBox="0 0 64 64"><path d="M7 20h30l-5 21H12L7 20ZM13 28c4-4 8-4 12 0 3-2 6-2 9 0M34 31h12l9 10v8H9v-8h38M40 31v10h15"/><circle cx="18" cy="50" r="5"/><circle cx="48" cy="50" r="5"/></symbol>
     <symbol id="i-access" viewBox="0 0 64 64"><path d="M8 9v46M56 9v46M16 32h32M16 32l8-6M16 32l8 6M48 32l-8-6M48 32l-8 6"/></symbol>
     <symbol id="i-pin" viewBox="0 0 48 48"><path d="M24 42s13-12 13-24a13 13 0 1 0-26 0c0 12 13 24 13 24Z"/><circle cx="24" cy="18" r="4"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></symbol>
@@ -97,7 +97,6 @@
         <img class="hero-image" src="/assets/images/bager-iskopi-labin-hero.png" width="1832" height="1024" alt="Ilustrativni prikaz kompaktnog bagera na kamenitom istarskom terenu" fetchpriority="high">
       </picture>
       <div class="hero-shade"></div>
-      <svg class="terrain-lines" viewBox="0 0 800 420" preserveAspectRatio="none" aria-hidden="true"><path d="M-50 315C115 219 196 395 370 283S635 170 850 242"/><path d="M-50 342C119 253 198 422 380 312S645 207 850 269"/><path d="M-50 372C129 290 207 452 391 344S654 244 850 299"/></svg>
       <div class="shell hero-content">
         <p class="eyebrow light"><span></span> Labin <b>•</b> Istra</p>
         <h1 id="hero-title">Bager iskopi<br>u Labinu <br class="mobile-only">i cijeloj Istri</h1>
@@ -238,7 +237,7 @@
   </footer>
 
   <a class="mobile-call is-hidden" data-phone-link href="#" aria-label="Nazovite LIBRA"><span>Nazovite</span><svg><use href="#i-arrow"/></svg></a>
-  <button class="back-top" data-back-top type="button" aria-label="Povratak na vrh stranice" aria-hidden="true" tabindex="-1"><span>Na vrh</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+  <button class="back-top" data-back-top type="button" aria-label="Povratak na vrh stranice" aria-hidden="true" tabindex="-1"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
   <script src="/config.js"></script>
   <script src="/assets/app.js" defer></script>
 </body>

@@ -10,9 +10,10 @@ const privacy = await readFile(resolve(publicDir, 'privatnost.html'), 'utf8');
 const englishPrivacy = await readFile(resolve(publicDir, 'en/privacy.html'), 'utf8');
 const config = await readFile(resolve(publicDir, 'config.js'), 'utf8');
 const headers = await readFile(resolve(publicDir, '_headers'), 'utf8');
+const styles = await readFile(resolve(publicDir, 'assets/styles.css'), 'utf8');
 const required = [
   '<html lang="hr">', '<h1', 'application/ld+json', 'rel="canonical"',
-  'data-phone-link', 'id="inquiry-form"', 'prefers-reduced-motion'
+  'data-phone-link', 'id="inquiry-form"', 'data-page-progress', 'data-back-top', 'prefers-reduced-motion'
 ];
 for (const marker of required) {
   if (!html.includes(marker)) throw new Error(`Missing required marker: ${marker}`);
@@ -33,6 +34,7 @@ for (const page of [html, englishHtml]) {
     for (const candidate of match[1].split(',')) referenced.push(candidate.trim().split(/\s+/)[0]);
   }
 }
+for (const match of styles.matchAll(/url\(['"]?(\/(?:assets|favicon)[^'"?#)]+)['"]?\)/g)) referenced.push(match[1]);
 for (const item of new Set(referenced)) await access(resolve(publicDir, item.slice(1)));
 
 for (const forbidden of ['{{SITE_URL}}', '/api/inquiries', 'PHONE_NUMBER_TO_CONFIRM', 'EMAIL_TO_CONFIRM', 'WHATSAPP_TO_CONFIRM', 'lorem ipsum']) {
@@ -44,5 +46,6 @@ if (!privacy.includes('https://libra.mateolabs.dev/privatnost')) throw new Error
 if (!englishPrivacy.includes('https://libra.mateolabs.dev/en/privacy')) throw new Error('English privacy canonical URL is missing.');
 if (!config.includes('https://formsubmit.co/ajax/')) throw new Error('Static email forwarding endpoint is missing.');
 if (!headers.includes('https://formsubmit.co')) throw new Error('Cloudflare CSP does not allow the form endpoint.');
+if (!headers.includes('/assets/fonts/*')) throw new Error('Immutable font caching policy is missing.');
 
 console.log(`Validated HR/EN static pages, localized forms, SEO metadata, headers and ${new Set(referenced).size} referenced assets.`);
