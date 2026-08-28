@@ -5,5 +5,8 @@
   "description": "Static production website for LIBRA, obrt za usluge u građevinarstvu",
   "scripts": {
     "check": "node --check public/assets/app.js && node scripts/validate.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "4.127.1"
   }
 }
