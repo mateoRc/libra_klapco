@@ -3,6 +3,34 @@
 
   const root = document.documentElement;
   const config = window.LIBRA_CONFIG || {};
+  const isEnglish = root.lang === 'en';
+  const copy = isEnglish ? {
+    choosePhoto: 'Choose a photo',
+    fileTooLarge: 'The file is too large. The maximum size is 5 MB.',
+    invalidFile: 'Choose a JPG, PNG or WebP image.',
+    invalidForm: 'Check the highlighted fields and consent.',
+    sending: 'Sending inquiry…',
+    unconfigured: 'The form is not connected to an email address yet. Please contact us directly.',
+    subject: 'New inquiry from the LIBRA website',
+    consentKey: 'Consent',
+    consentValue: 'Accepted',
+    sendFailed: 'The inquiry was not sent.',
+    success: 'Thank you! Your inquiry has been sent. We will contact you about the work.',
+    genericError: 'The inquiry cannot be sent right now. Please try again.'
+  } : {
+    choosePhoto: 'Odaberite fotografiju',
+    fileTooLarge: 'Datoteka je prevelika. Najveća dopuštena veličina je 5 MB.',
+    invalidFile: 'Odaberite fotografiju u JPG, PNG ili WebP formatu.',
+    invalidForm: 'Provjerite označena polja i privolu.',
+    sending: 'Šaljemo upit…',
+    unconfigured: 'Obrazac još nije povezan s adresom e-pošte. Kontaktirajte nas izravno.',
+    subject: 'Novi upit sa stranice LIBRA',
+    consentKey: 'Privola',
+    consentValue: 'Prihvaćena',
+    sendFailed: 'Upit nije poslan.',
+    success: 'Hvala! Vaš upit je poslan. Javit ćemo vam se u vezi s radovima.',
+    genericError: 'Upit trenutačno nije moguće poslati.'
+  };
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (root.classList.contains('intro-on')) {
@@ -78,7 +106,7 @@
   const fileInput = form.elements.photo;
   const fileName = form.querySelector('[data-file-name]');
   fileInput?.addEventListener('change', () => {
-    fileName.textContent = fileInput.files[0]?.name || 'Odaberite fotografiju';
+    fileName.textContent = fileInput.files[0]?.name || copy.choosePhoto;
   });
   form.querySelector('.file-ui')?.addEventListener('click', () => fileInput.click());
 
@@ -98,8 +126,8 @@
 
   const validateFile = file => {
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) throw new Error('Datoteka je prevelika. Najveća dopuštena veličina je 5 MB.');
-    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) throw new Error('Odaberite fotografiju u JPG, PNG ili WebP formatu.');
+    if (file.size > 5 * 1024 * 1024) throw new Error(copy.fileTooLarge);
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) throw new Error(copy.invalidFile);
   };
 
   form.addEventListener('submit', async event => {
@@ -107,37 +135,37 @@
     const status = form.querySelector('.form-status');
     status.className = 'form-status';
     if (!validate()) {
-      status.textContent = 'Provjerite označena polja i privolu.';
+      status.textContent = copy.invalidForm;
       status.classList.add('error');
       form.querySelector(':invalid')?.focus();
       return;
     }
     form.classList.add('busy');
     form.setAttribute('aria-busy', 'true');
-    status.textContent = 'Šaljemo upit…';
+    status.textContent = copy.sending;
     try {
-      if (!formEndpointConfigured) throw new Error('Obrazac još nije povezan s adresom e-pošte. Kontaktirajte nas izravno.');
+      if (!formEndpointConfigured) throw new Error(copy.unconfigured);
       validateFile(fileInput.files[0]);
       const payload = new FormData(form);
       payload.delete('startedAt');
-      payload.set('_subject', 'Novi upit sa stranice LIBRA');
+      payload.set('_subject', copy.subject);
       payload.set('_template', 'table');
       payload.set('_url', location.href);
-      payload.set('Privola', 'Prihvaćena');
+      payload.set(copy.consentKey, copy.consentValue);
       const response = await fetch(formEndpoint, {
         method: 'POST',
         headers: { Accept: 'application/json' },
         body: payload
       });
       const result = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(result.message || 'Upit nije poslan.');
-      status.textContent = 'Hvala! Vaš upit je poslan. Javit ćemo vam se u vezi s radovima.';
+      if (!response.ok) throw new Error(result.message || copy.sendFailed);
+      status.textContent = copy.success;
       status.classList.add('success');
       form.reset();
-      fileName.textContent = 'Odaberite fotografiju';
+      fileName.textContent = copy.choosePhoto;
       form.elements.startedAt.value = Date.now();
     } catch (error) {
-      status.textContent = error.message || 'Upit trenutačno nije moguće poslati.';
+      status.textContent = error.message || copy.genericError;
       status.classList.add('error');
     } finally {
       form.classList.remove('busy');

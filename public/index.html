@@ -8,8 +8,12 @@
   <meta name="theme-color" content="#191a18">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://libra.mateolabs.dev/">
+  <link rel="alternate" hreflang="hr" href="https://libra.mateolabs.dev/">
+  <link rel="alternate" hreflang="en" href="https://libra.mateolabs.dev/en/">
+  <link rel="alternate" hreflang="x-default" href="https://libra.mateolabs.dev/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="hr_HR">
+  <meta property="og:locale:alternate" content="en_GB">
   <meta property="og:title" content="Bager iskopi Labin i Istra | LIBRA">
   <meta property="og:description" content="Pouzdani iskopi i priprema terena za privatne, poslovne i građevinske projekte.">
   <meta property="og:url" content="https://libra.mateolabs.dev/">
@@ -65,14 +69,17 @@
 
   <header class="site-header" data-header>
     <div class="shell header-inner">
-      <a class="brand" href="#vrh" aria-label="LIBRA — početna">
+      <a class="brand" href="/" aria-label="LIBRA — početna">
         <img src="/assets/logo-dark.svg" alt="LIBRA" width="154" height="44">
       </a>
       <nav class="desktop-nav" aria-label="Glavna navigacija">
         <a href="#usluge">Usluge</a><a href="#o-nama">O nama</a><a href="#podrucje">Područje rada</a><a href="#projekti">Projekti</a><a href="#kontakt">Kontakt</a>
       </nav>
-      <a class="button button-small header-call is-hidden" data-phone-link href="#"><span>Nazovite</span><svg><use href="#i-arrow"/></svg></a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span class="sr-only">Otvori izbornik</span></button>
+      <div class="header-actions">
+        <nav class="language-switch" aria-label="Odabir jezika"><a href="/" lang="hr" aria-current="page">HR</a><span aria-hidden="true">/</span><a href="/en/" lang="en">EN</a></nav>
+        <a class="button button-small header-call is-hidden" data-phone-link href="#"><span>Nazovite</span><svg><use href="#i-arrow"/></svg></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span class="sr-only">Otvori izbornik</span></button>
+      </div>
     </div>
     <nav class="mobile-nav" id="mobile-menu" aria-label="Mobilna navigacija">
       <a href="#usluge">Usluge</a><a href="#o-nama">O nama</a><a href="#podrucje">Područje rada</a><a href="#projekti">Projekti</a><a href="#kontakt">Kontakt</a>

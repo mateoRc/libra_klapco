@@ -1,6 +1,8 @@
 # LIBRA — bager iskopi Labin i Istra
 
-Static Croatian presentation website for **LIBRA, obrt za usluge u građevinarstvu**. The production site is designed for Cloudflare Pages and contains no application server, database, or persistent storage.
+Static Croatian and English presentation website for **LIBRA, obrt za usluge u građevinarstvu**. The production site is designed for Cloudflare Workers static assets and contains no application server, database, or persistent storage.
+
+The website is bilingual: Croatian is the default at `/`, while the complete English version is available at `/en/`. Both versions include language switches, localized forms and privacy pages, canonical URLs and `hreflang` metadata.
 
 ## Run locally with Docker
 
@@ -45,23 +47,24 @@ formEndpoint: 'https://formsubmit.co/ajax/office@example.com'
 
 FormSubmit sends an activation email after the first submission. The recipient must confirm that message before subsequent inquiries are delivered. The static site sends the name, contact, location, work description, consent, and optional image directly to FormSubmit; Cloudflare does not store inquiry data.
 
-## Deploy to Cloudflare Pages
+## Deploy to Cloudflare Workers
 
-Connect the GitHub repository in **Workers & Pages → Create application → Pages → Connect to Git** and use:
+The repository includes `wrangler.jsonc` for the `libra-klapco` Worker and its `public` static assets. Connect the GitHub repository through Workers Builds and use:
 
-- Framework preset: `None`
 - Production branch: `main`
 - Build command: leave blank
-- Build output directory: `public`
+- Deploy command: `npx wrangler deploy`
 - Root directory: `/`
 
-After the first successful deployment, open **Custom domains → Set up a domain** and enter `libra.mateolabs.dev`. If `mateolabs.dev` is already managed by the same Cloudflare account, Cloudflare creates the DNS record automatically.
+After the first successful deployment, open **Settings → Domains & Routes → Add → Custom Domain** and enter `libra.mateolabs.dev`. Cloudflare creates the DNS record and certificate automatically when `mateolabs.dev` is an active zone in the same account.
 
 Every push to `main` triggers a new production deployment.
 
 ## Content and images
 
 - Homepage: `public/index.html`
+- English homepage: `public/en/index.html`
+- Privacy pages: `public/privatnost.html`, `public/en/privacy.html`
 - Layout and visual system: `public/assets/styles.css`
 - Interactions and email form: `public/assets/app.js`
 - Public contact/form configuration: `public/config.js`
