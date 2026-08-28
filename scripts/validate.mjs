@@ -40,7 +40,8 @@ for (const forbidden of ['{{SITE_URL}}', '/api/inquiries', 'PHONE_NUMBER_TO_CONF
   if (publicText.includes(forbidden.toLowerCase())) throw new Error(`Static files contain forbidden value: ${forbidden}`);
 }
 if (!html.includes('https://libra.mateolabs.dev/')) throw new Error('Production domain is missing from homepage metadata.');
-if (!englishPrivacy.includes('https://libra.mateolabs.dev/en/privacy.html')) throw new Error('English privacy canonical URL is missing.');
+if (!privacy.includes('https://libra.mateolabs.dev/privatnost')) throw new Error('Croatian privacy canonical URL is missing.');
+if (!englishPrivacy.includes('https://libra.mateolabs.dev/en/privacy')) throw new Error('English privacy canonical URL is missing.');
 if (!config.includes('https://formsubmit.co/ajax/')) throw new Error('Static email forwarding endpoint is missing.');
 if (!headers.includes('https://formsubmit.co')) throw new Error('Cloudflare CSP does not allow the form endpoint.');
 
