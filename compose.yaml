@@ -1,0 +1,27 @@
+services:
+  web:
+    build: .
+    container_name: libra-iskopi
+    restart: unless-stopped
+    init: true
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    ports:
+      - "80:3000"
+    environment:
+      NODE_ENV: production
+      PUBLIC_SITE_URL: ${PUBLIC_SITE_URL:-http://localhost}
+      PHONE_NUMBER: ${PHONE_NUMBER:-}
+      EMAIL_ADDRESS: ${EMAIL_ADDRESS:-}
+      WHATSAPP_NUMBER: ${WHATSAPP_NUMBER:-}
+      CONTACT_WEBHOOK_URL: ${CONTACT_WEBHOOK_URL:-}
+    volumes:
+      - libra_inquiries:/data
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+
+volumes:
+  libra_inquiries:
