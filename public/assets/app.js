@@ -35,7 +35,7 @@
 
   if (root.classList.contains('intro-on')) {
     try { sessionStorage.setItem('libra-intro', '1'); } catch (_) {}
-    setTimeout(() => root.classList.remove('intro-on'), 1500);
+    setTimeout(() => root.classList.remove('intro-on'), 2300);
   }
 
   const header = document.querySelector('[data-header]');
