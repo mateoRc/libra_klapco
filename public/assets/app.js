@@ -32,48 +32,12 @@
     genericError: 'Upit trenutačno nije moguće poslati.'
   };
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const pageProgress = document.querySelector('[data-page-progress]');
-  pageProgress?.classList.add('loading');
-
-  const finishPageLoad = () => {
-    pageProgress?.classList.remove('loading');
-    pageProgress?.classList.add('complete');
-    setTimeout(() => {
-      pageProgress?.classList.remove('complete');
-      pageProgress?.classList.add('ready');
-    }, reducedMotion ? 0 : 420);
-  };
-  if (document.readyState === 'complete') finishPageLoad();
-  else addEventListener('load', finishPageLoad, { once: true });
-
-  if (root.classList.contains('intro-on')) {
-    setTimeout(() => root.classList.remove('intro-on'), 2300);
-  }
-
-  document.querySelectorAll('.site-header .brand, .language-switch a').forEach(link => {
-    link.addEventListener('click', event => {
-      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      try { sessionStorage.setItem('libra-skip-intro', '1'); } catch (_) {}
-    });
-  });
-
   const header = document.querySelector('[data-header]');
-  const backTop = document.querySelector('[data-back-top]');
   const updateScrollUi = () => {
     header?.classList.toggle('compact', scrollY > 36);
-    const showBackTop = scrollY > 420;
-    backTop?.classList.toggle('visible', showBackTop);
-    backTop?.setAttribute('aria-hidden', String(!showBackTop));
-    if (backTop) backTop.tabIndex = showBackTop ? 0 : -1;
-    const scrollable = document.documentElement.scrollHeight - innerHeight;
-    const progress = scrollable > 0 ? Math.min(1, scrollY / scrollable) : 0;
-    pageProgress?.style.setProperty('--scroll-progress', progress.toFixed(4));
   };
   updateScrollUi();
   addEventListener('scroll', updateScrollUi, { passive: true });
-  backTop?.addEventListener('click', () => {
-    scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
-  });
 
   const menuButton = document.querySelector('.menu-toggle');
   const mobileMenu = document.querySelector('.mobile-nav');

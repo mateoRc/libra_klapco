@@ -13,7 +13,8 @@ const headers = await readFile(resolve(publicDir, '_headers'), 'utf8');
 const styles = await readFile(resolve(publicDir, 'assets/styles.css'), 'utf8');
 const required = [
   '<html lang="hr">', '<h1', 'application/ld+json', 'rel="canonical"',
-  'data-phone-link', 'id="inquiry-form"', 'data-page-progress', 'data-back-top', 'prefers-reduced-motion'
+  'data-phone-link', 'id="usluge"', 'id="podrucje"', 'id="kontakt"',
+  'id="inquiry-form"', 'hasOfferCatalog'
 ];
 for (const marker of required) {
   if (!html.includes(marker)) throw new Error(`Missing required marker: ${marker}`);
@@ -47,5 +48,6 @@ if (!englishPrivacy.includes('https://libra.mateolabs.dev/en/privacy')) throw ne
 if (!config.includes('https://formsubmit.co/ajax/')) throw new Error('Static email forwarding endpoint is missing.');
 if (!headers.includes('https://formsubmit.co')) throw new Error('Cloudflare CSP does not allow the form endpoint.');
 if (!headers.includes('/assets/fonts/*')) throw new Error('Immutable font caching policy is missing.');
+if (!styles.includes('prefers-reduced-motion')) throw new Error('Reduced-motion styles are missing.');
 
 console.log(`Validated HR/EN static pages, localized forms, SEO metadata, headers and ${new Set(referenced).size} referenced assets.`);

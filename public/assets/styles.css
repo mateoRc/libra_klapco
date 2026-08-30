@@ -187,3 +187,30 @@ h3{font-weight:600;line-height:1}
 @keyframes intro-curtain{to{opacity:0;visibility:hidden;transform:translateY(-100%)}}
 @media(max-width:760px){.brand-word{font-size:12px;letter-spacing:.14em;text-indent:.14em}.service-card>svg{top:24px;right:22px;width:36px;height:36px;margin:0;padding:0;border-radius:0}.service-number{top:27px;left:22px}.footer-brand-mark{width:102px;height:58px}.footer-brand>strong{font-size:11px}.intro-lockup{width:min(82vw,350px)}.site-header .header-inner{width:var(--shell)}.site-header .brand-word{font-size:18px;letter-spacing:.18em;text-indent:.18em}.mobile-nav{padding:12px 18px 22px}.footer-top{grid-template-columns:1fr}.field input:not([type=file]),.field textarea{font-size:16px}.footer-bottom nav{flex-wrap:wrap}.footer-bottom nav a{display:flex;align-items:center;min-height:44px}.back-top{right:18px;bottom:max(16px,env(safe-area-inset-bottom));width:52px;height:52px;padding:5px}.back-top svg{width:40px;height:40px}.has-mobile-call .back-top{bottom:82px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.intro{display:none!important}}
+
+/* Lean business-card layout: hard edges, short sections and a direct contact path. */
+.services .section-head{margin-bottom:48px}
+.service-card{min-height:270px;padding:30px}
+.services-contact{display:flex;align-items:center;justify-content:flex-end;gap:10px;width:max-content;margin:28px 0 0 auto;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.42);color:rgba(255,255,255,.72);font-size:13px}
+.services-contact strong{color:#fff}
+.services-contact svg{width:22px;height:22px;margin-left:8px;fill:none;stroke:var(--ochre);stroke-width:1.7;transition:transform .25s var(--ease)}
+.services-contact:hover svg{transform:translateX(5px)}
+.area{border-top:7px solid var(--ochre)}
+.area-map,.area-map svg{min-height:500px;height:500px}
+.area-facts{max-width:540px;margin:0 0 34px;padding:0;border-top:1px solid var(--line);list-style:none}
+.area-facts li{display:grid;grid-template-columns:46px 1fr;gap:12px;align-items:center;min-height:55px;border-bottom:1px solid var(--line)}
+.area-facts span{color:var(--rust);font-size:10px;font-weight:600;letter-spacing:.12em}
+.area-facts strong{font-size:14px}
+.contact-grid{gap:70px}
+.site-footer{padding-top:64px}
+.footer-top{padding-bottom:52px}
+
+@media(max-width:760px){
+  .services .section-head{margin-bottom:30px}
+  .service-card{min-height:190px}
+  .services-contact{justify-content:space-between;width:100%;margin-top:22px}
+  .area{border-top-width:5px}
+  .area-facts{margin-bottom:28px}
+  .area-map,.area-map svg{min-height:300px;height:300px}
+  .site-footer{padding-top:52px}
+}
