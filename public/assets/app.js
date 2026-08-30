@@ -5,9 +5,6 @@
   const config = window.LIBRA_CONFIG || {};
   const isEnglish = root.lang === 'en';
   const copy = isEnglish ? {
-    choosePhoto: 'Choose a photo',
-    fileTooLarge: 'The file is too large. The maximum size is 5 MB.',
-    invalidFile: 'Choose a JPG, PNG or WebP image.',
     invalidForm: 'Check the highlighted fields and consent.',
     sending: 'Sending inquiry…',
     unconfigured: 'The form is not connected to an email address yet. Please contact us directly.',
@@ -18,9 +15,6 @@
     success: 'Thank you! Your inquiry has been sent. We will contact you about the work.',
     genericError: 'The inquiry cannot be sent right now. Please try again.'
   } : {
-    choosePhoto: 'Odaberite fotografiju',
-    fileTooLarge: 'Datoteka je prevelika. Najveća dopuštena veličina je 5 MB.',
-    invalidFile: 'Odaberite fotografiju u JPG, PNG ili WebP formatu.',
     invalidForm: 'Provjerite označena polja i privolu.',
     sending: 'Šaljemo upit…',
     unconfigured: 'Obrazac još nije povezan s adresom e-pošte. Kontaktirajte nas izravno.',
@@ -110,17 +104,6 @@
     && !formEndpoint.includes('your-email@example.com');
   if (formEndpointConfigured) form.action = formEndpoint;
   form.elements.startedAt.value = Date.now();
-  const fileInput = form.elements.photo;
-  const fileName = form.querySelector('[data-file-name]');
-  fileInput?.addEventListener('change', () => {
-    fileName.textContent = fileInput.files[0]?.name || copy.choosePhoto;
-  });
-  form.querySelector('.file-ui')?.addEventListener('keydown', event => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      fileInput.click();
-    }
-  });
 
   const validate = () => {
     let valid = true;
@@ -134,12 +117,6 @@
     const consent = form.elements.consent;
     if (!consent.checked) valid = false;
     return valid;
-  };
-
-  const validateFile = file => {
-    if (!file) return;
-    if (file.size > 5 * 1024 * 1024) throw new Error(copy.fileTooLarge);
-    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) throw new Error(copy.invalidFile);
   };
 
   form.addEventListener('submit', async event => {
@@ -157,7 +134,6 @@
     status.textContent = copy.sending;
     try {
       if (!formEndpointConfigured) throw new Error(copy.unconfigured);
-      validateFile(fileInput.files[0]);
       const payload = new FormData(form);
       payload.delete('startedAt');
       payload.set('_subject', copy.subject);
@@ -174,7 +150,6 @@
       status.textContent = copy.success;
       status.classList.add('success');
       form.reset();
-      fileName.textContent = copy.choosePhoto;
       form.elements.startedAt.value = Date.now();
     } catch (error) {
       status.textContent = error.message || copy.genericError;
