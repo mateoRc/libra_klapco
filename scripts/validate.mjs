@@ -34,6 +34,14 @@ for (const page of [html, englishHtml]) {
   for (const removedMarker of ['class="service-number"', '01 —', '02 —', '03 —']) {
     if (page.includes(removedMarker)) throw new Error(`Homepage still contains removed numbering: ${removedMarker}`);
   }
+  if ((page.match(/class="service-card-image"/g) || []).length !== 6) throw new Error('Each homepage must expose six indexable service images.');
+  if (!page.includes('class="seo-details section-pad"')) throw new Error('Homepage supporting excavation content is missing.');
+  const structuredData = page.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/)?.[1];
+  if (!structuredData) throw new Error('Homepage structured data is missing.');
+  const schema = JSON.parse(structuredData);
+  if (!Array.isArray(schema['@graph']) || !schema['@graph'].some(item => item['@type'] === 'GeneralContractor')) {
+    throw new Error('Homepage LocalBusiness structured data graph is incomplete.');
+  }
 }
 
 const pages = [html, englishHtml, privacy, englishPrivacy];

@@ -87,7 +87,7 @@
     if (current.nodeType !== Node.ELEMENT_NODE) return;
     if (current.matches('[data-year],[data-phone-text],.form-status')) return;
 
-    ['aria-label', 'placeholder', 'lang'].forEach(attribute => {
+    ['aria-label', 'placeholder', 'lang', 'alt'].forEach(attribute => {
       if (translated.hasAttribute(attribute)) current.setAttribute(attribute, translated.getAttribute(attribute));
       else current.removeAttribute(attribute);
     });
@@ -119,6 +119,10 @@
     if (translatedCanonical && currentCanonical) currentCanonical.href = translatedCanonical.href;
     document.querySelectorAll('meta[property^="og:"]').forEach(meta => {
       const translatedMeta = translatedDocument.querySelector(`meta[property="${meta.getAttribute('property')}"]`);
+      if (translatedMeta) meta.content = translatedMeta.content;
+    });
+    document.querySelectorAll('meta[name^="twitter:"]').forEach(meta => {
+      const translatedMeta = translatedDocument.querySelector(`meta[name="${meta.getAttribute('name')}"]`);
       if (translatedMeta) meta.content = translatedMeta.content;
     });
     const translatedStructuredData = translatedDocument.querySelector('script[type="application/ld+json"]');

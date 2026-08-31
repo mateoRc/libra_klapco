@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Excavation Services in Labin and Istria | LIBRA</title>
-  <meta name="description" content="Excavation for foundations, pools, utility trenches and site preparation in Labin and across Istria. Send the location and request a quote from LIBRA.">
+  <title>Excavation and Earthworks Labin, Istria | LIBRA</title>
+  <meta name="description" content="Excavator services for foundations, pools, utility trenches, drainage and site preparation in Labin and across Istria. Request a site assessment.">
   <meta name="theme-color" content="#191a18">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://libra.mateolabs.dev/en/">
@@ -14,11 +14,19 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_GB">
   <meta property="og:locale:alternate" content="hr_HR">
-  <meta property="og:title" content="Excavation Services in Labin and Istria | LIBRA">
-  <meta property="og:description" content="Reliable excavation and site preparation for private, commercial and construction projects.">
+  <meta property="og:site_name" content="LIBRA">
+  <meta property="og:title" content="Excavation and Earthworks Labin, Istria | LIBRA">
+  <meta property="og:description" content="Excavator services for foundations, pools, utility trenches, drainage and site preparation in Labin and across Istria.">
   <meta property="og:url" content="https://libra.mateolabs.dev/en/">
   <meta property="og:image" content="https://libra.mateolabs.dev/assets/images/bager-iskopi-labin-hero.png">
   <meta property="og:image:alt" content="Illustrative view of an excavator on Istrian terrain">
+  <meta property="og:image:width" content="1832">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:type" content="image/png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Excavation and Earthworks Labin, Istria | LIBRA">
+  <meta name="twitter:description" content="Foundations, pools, utility trenches, drainage and site preparation in Labin and across Istria.">
+  <meta name="twitter:image" content="https://libra.mateolabs.dev/assets/images/bager-iskopi-labin-hero.png">
   <link rel="icon" href="/assets/libra_logo.png" type="image/png">
   <link rel="preload" href="/assets/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -27,33 +35,61 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "GeneralContractor",
-    "name": "LIBRA, obrt za usluge u građevinarstvu",
-    "url": "https://libra.mateolabs.dev/en/",
-    "logo": "https://libra.mateolabs.dev/assets/libra_logo.png",
-    "description": "Excavation and site preparation services throughout Labin and Istria.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Rudarska 10",
-      "addressLocality": "Labin",
-      "addressCountry": "HR"
-    },
-    "areaServed": [
-      {"@type": "City", "name": "Labin"},
-      {"@type": "AdministrativeArea", "name": "Istria County"}
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Excavation services",
-      "itemListElement": [
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Foundation excavation"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Material transport"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Earthworks"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Access-road construction"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sewerage and drainage"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Yard landscaping"}}
-      ]
-    }
+    "@graph": [
+      {
+        "@type": "GeneralContractor",
+        "@id": "https://libra.mateolabs.dev/#business",
+        "name": "LIBRA, obrt za usluge u građevinarstvu",
+        "alternateName": "LIBRA",
+        "url": "https://libra.mateolabs.dev/",
+        "logo": "https://libra.mateolabs.dev/assets/libra_logo.png",
+        "image": "https://libra.mateolabs.dev/assets/images/bager-iskopi-labin-hero.png",
+        "description": "Excavation, earthworks and site-preparation services in Labin and across Istria.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rudarska 10",
+          "addressLocality": "Labin",
+          "addressRegion": "Istria County",
+          "addressCountry": "HR"
+        },
+        "areaServed": [
+          {"@type": "City", "name": "Labin"},
+          {"@type": "AdministrativeArea", "name": "Istria County"}
+        ],
+        "knowsLanguage": ["hr", "en"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Excavation and earthworks services",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Foundation and pool excavation", "serviceType": "Machine excavation and excavator services", "areaServed": "Labin and Istria County", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Material transport", "serviceType": "Tipper delivery and removal of construction material", "areaServed": "Labin and Istria County", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Earthworks and site preparation", "serviceType": "Grading, filling and terrain shaping", "areaServed": "Labin and Istria County", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Access-road construction", "serviceType": "Formation and compaction of gravel access roads", "areaServed": "Labin and Istria County", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Utility trench, sewerage and drainage excavation", "serviceType": "Machine-dug trenches for utilities and drainage", "areaServed": "Labin and Istria County", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Yard landscaping", "serviceType": "Terrain shaping and finish grading", "areaServed": "Labin and Istria County", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}}
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://libra.mateolabs.dev/#website",
+        "url": "https://libra.mateolabs.dev/",
+        "name": "LIBRA — excavation in Labin and Istria",
+        "inLanguage": "en",
+        "publisher": {"@id": "https://libra.mateolabs.dev/#business"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://libra.mateolabs.dev/en/#webpage",
+        "url": "https://libra.mateolabs.dev/en/",
+        "name": "Excavation and Earthworks Labin, Istria | LIBRA",
+        "description": "Excavator services for foundations, pools, utility trenches, drainage and site preparation in Labin and across Istria.",
+        "inLanguage": "en",
+        "isPartOf": {"@id": "https://libra.mateolabs.dev/#website"},
+        "about": {"@id": "https://libra.mateolabs.dev/#business"},
+        "primaryImageOfPage": {"@type": "ImageObject", "url": "https://libra.mateolabs.dev/assets/images/bager-iskopi-labin-hero.png", "width": 1832, "height": 1024}
+      }
+    ]
   }
   </script>
 </head>
@@ -123,15 +159,15 @@
       <div class="shell">
         <div class="section-head reveal">
           <div><p class="eyebrow light"><span></span> Services</p><h2 id="services-title">What we do</h2></div>
-          <p>Send the location and a short description of the work. We will assess access, the scope and the next step.</p>
+          <p>We provide excavator services and machine excavation for private, construction and infrastructure work. Send the location and a short job description.</p>
         </div>
         <div class="service-grid">
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-foundation"/></svg><h3>Foundation excavation</h3><p>Building-pit and foundation-trench excavation to project dimensions, with a tidy base prepared for the next construction phase.</p></article>
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-load"/></svg><h3>Material transport</h3><p>Delivery of aggregate and building material, plus tipper-truck removal of surplus soil and stone from the site.</p></article>
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-level"/></svg><h3>Earthworks</h3><p>Rough and finish grading, filling and shaping of the plot so the ground is ready for construction.</p></article>
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-access"/></svg><h3>Access-road construction</h3><p>Formation, filling and compaction of gravel approaches for safe access to homes, plots and building sites.</p></article>
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-channel"/></svg><h3>Sewerage and drainage</h3><p>Machine-dug drainage and utility trenches, with the route prepared for safe pipe installation.</p></article>
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-clear"/></svg><h3>Yard landscaping</h3><p>Shaping courtyards, terraces and outdoor areas—from removing excess soil to final terrain levelling.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/iskopi-temelja.jpg" width="900" height="600" loading="lazy" alt="Excavator digging foundations"><svg aria-hidden="true"><use href="#i-foundation"/></svg><h3>Foundation and pool excavation</h3><p>Excavation of building pits, foundation trenches or pools to project dimensions, with a tidy base prepared for the next phase.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/prijevoz-materijala.jpg" width="900" height="600" loading="lazy" alt="Tipper transport of soil and construction material"><svg aria-hidden="true"><use href="#i-load"/></svg><h3>Material transport</h3><p>Delivery of aggregate and building material, plus tipper-truck removal of surplus soil and stone from the site.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/zemljani-radovi.jpg" width="900" height="600" loading="lazy" alt="Earthworks and excavator site preparation"><svg aria-hidden="true"><use href="#i-level"/></svg><h3>Earthworks</h3><p>Rough and finish grading, filling and shaping of the plot so the ground is ready for construction.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/pristupni-putovi.jpg" width="900" height="600" loading="lazy" alt="Construction of a gravel access road"><svg aria-hidden="true"><use href="#i-access"/></svg><h3>Access-road construction</h3><p>Formation, filling and compaction of gravel approaches for safe access to homes, plots and building sites.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/kanalizacija-drenaza.jpg" width="900" height="600" loading="lazy" alt="Machine excavation for sewerage and drainage trenches"><svg aria-hidden="true"><use href="#i-channel"/></svg><h3>Sewerage and drainage</h3><p>Machine-dug drainage and utility trenches, with the route prepared for safe pipe installation.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/uredenje-okucnica.jpg" width="900" height="600" loading="lazy" alt="Yard landscaping and terrain grading"><svg aria-hidden="true"><use href="#i-clear"/></svg><h3>Yard landscaping</h3><p>Shaping courtyards, terraces and outdoor areas—from removing excess soil to final terrain levelling.</p></article>
         </div>
         <a class="services-contact reveal" href="#kontakt">Need another type of excavation? <strong>Send an inquiry</strong><svg><use href="#i-arrow"/></svg></a>
       </div>
@@ -142,7 +178,7 @@
         <div class="area-copy reveal">
           <p class="eyebrow"><span></span> Service area</p>
           <h2 id="area-title">Excavation in Labin<br>and across Istria</h2>
-          <p>LIBRA is a local excavation and site-preparation business based in Labin.</p>
+          <p>LIBRA is a local excavation, earthworks and site-preparation business based in Labin. We work in Labin, Rabac, Raša, Kršan, Pićan and across Istria by arrangement.</p>
           <ul class="area-facts">
             <li><strong>Based in Labin</strong></li>
             <li><strong>Work throughout Istria</strong></li>
@@ -160,6 +196,22 @@
             <path class="map-pointer" d="m385 318 53-23"/>
             <text class="map-labin-label" x="445" y="295">LABIN</text>
           </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="seo-details section-pad" aria-labelledby="seo-details-title">
+      <div class="shell seo-details-grid">
+        <div class="seo-details-intro reveal">
+          <p class="eyebrow"><span></span> Excavator services</p>
+          <h2 id="seo-details-title">Excavation and site preparation</h2>
+          <p>Machine excavation is planned around soil conditions, excavator access, location and job scope. Send accurate site details for an initial assessment.</p>
+        </div>
+        <div class="seo-faq reveal">
+          <article><h3>What excavation work do you provide?</h3><p>Foundation and pool excavation, utility, sewerage and drainage trenches, site preparation, plot grading, access-road work and yard landscaping.</p></article>
+          <article><h3>Where do you provide excavator services?</h3><p>We are based in Labin and arrange work throughout the Labin area and Istria, depending on machine access and the scope of the job.</p></article>
+          <article><h3>How do I request an assessment?</h3><p>Send the location, excavation type, approximate dimensions and a description of site access. Site photos can be sent through WhatsApp.</p></article>
+          <article><h3>Can you remove excavated material?</h3><p>Yes. By arrangement, we remove surplus soil and stone and deliver the aggregate or building material required for the site by tipper truck.</p></article>
         </div>
       </div>
     </section>

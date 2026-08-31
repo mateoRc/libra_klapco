@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bager iskopi Labin i Istra | LIBRA</title>
-  <meta name="description" content="Bager iskopi, temelji, bazeni, kanali i priprema terena u Labinu i cijeloj Istri. Pošaljite lokaciju i zatražite ponudu od LIBRE.">
+  <title>Bager iskopi i kopanje Labin, Istra | LIBRA</title>
+  <meta name="description" content="Bager iskopi i kopanje bagerom za temelje, bazene, kanale, drenažu i pripremu terena u Labinu i cijeloj Istri. Zatražite procjenu radova.">
   <meta name="theme-color" content="#191a18">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://libra.mateolabs.dev/">
@@ -14,11 +14,19 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="hr_HR">
   <meta property="og:locale:alternate" content="en_GB">
-  <meta property="og:title" content="Bager iskopi Labin i Istra | LIBRA">
-  <meta property="og:description" content="Pouzdani iskopi i priprema terena za privatne, poslovne i građevinske projekte.">
+  <meta property="og:site_name" content="LIBRA">
+  <meta property="og:title" content="Bager iskopi i kopanje Labin, Istra | LIBRA">
+  <meta property="og:description" content="Kopanje bagerom, iskopi temelja i bazena, kanali, drenaža i priprema terena u Labinu i cijeloj Istri.">
   <meta property="og:url" content="https://libra.mateolabs.dev/">
   <meta property="og:image" content="https://libra.mateolabs.dev/assets/images/bager-iskopi-labin-hero.png">
   <meta property="og:image:alt" content="Ilustrativni prikaz bagera na istarskom terenu">
+  <meta property="og:image:width" content="1832">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:type" content="image/png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bager iskopi i kopanje Labin, Istra | LIBRA">
+  <meta name="twitter:description" content="Kopanje bagerom, temelji, bazeni, kanali, drenaža i priprema terena u Labinu i Istri.">
+  <meta name="twitter:image" content="https://libra.mateolabs.dev/assets/images/bager-iskopi-labin-hero.png">
   <link rel="icon" href="/assets/libra_logo.png" type="image/png">
   <link rel="preload" href="/assets/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -27,33 +35,61 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "GeneralContractor",
-    "name": "LIBRA, obrt za usluge u građevinarstvu",
-    "url": "https://libra.mateolabs.dev/",
-    "logo": "https://libra.mateolabs.dev/assets/libra_logo.png",
-    "description": "Usluge iskopa i pripreme terena na području Labina i Istre.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Rudarska 10",
-      "addressLocality": "Labin",
-      "addressCountry": "HR"
-    },
-    "areaServed": [
-      {"@type": "City", "name": "Labin"},
-      {"@type": "AdministrativeArea", "name": "Istarska županija"}
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Usluge iskopa",
-      "itemListElement": [
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Iskopi temelja"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Prijevoz materijala"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Zemljani radovi"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Izgradnja pristupnih putova"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Kanalizacija i drenaža"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Uređenje okućnica"}}
-      ]
-    }
+    "@graph": [
+      {
+        "@type": "GeneralContractor",
+        "@id": "https://libra.mateolabs.dev/#business",
+        "name": "LIBRA, obrt za usluge u građevinarstvu",
+        "alternateName": "LIBRA",
+        "url": "https://libra.mateolabs.dev/",
+        "logo": "https://libra.mateolabs.dev/assets/libra_logo.png",
+        "image": "https://libra.mateolabs.dev/assets/images/bager-iskopi-labin-hero.png",
+        "description": "Bager iskopi, kopanje bagerom, zemljani radovi i priprema terena na području Labina i cijele Istre.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rudarska 10",
+          "addressLocality": "Labin",
+          "addressRegion": "Istarska županija",
+          "addressCountry": "HR"
+        },
+        "areaServed": [
+          {"@type": "City", "name": "Labin"},
+          {"@type": "AdministrativeArea", "name": "Istarska županija"}
+        ],
+        "knowsLanguage": ["hr", "en"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Bager iskopi i zemljani radovi",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Iskopi temelja i bazena", "serviceType": "Strojni iskop i kopanje bagerom", "areaServed": "Labin i Istarska županija", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Prijevoz materijala", "serviceType": "Dovoz i odvoz materijala kiperom", "areaServed": "Labin i Istarska županija", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Zemljani radovi i priprema terena", "serviceType": "Ravnanje, nasipavanje i oblikovanje terena", "areaServed": "Labin i Istarska županija", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Izgradnja pristupnih putova", "serviceType": "Formiranje i zbijanje makadamskih prilaza", "areaServed": "Labin i Istarska županija", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Iskop kanala, kanalizacije i drenaže", "serviceType": "Strojni iskop kanala za instalacije i odvodnju", "areaServed": "Labin i Istarska županija", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Uređenje okućnica", "serviceType": "Oblikovanje i završno niveliranje terena", "areaServed": "Labin i Istarska županija", "provider": {"@id": "https://libra.mateolabs.dev/#business"}}}
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://libra.mateolabs.dev/#website",
+        "url": "https://libra.mateolabs.dev/",
+        "name": "LIBRA — bager iskopi Labin i Istra",
+        "inLanguage": "hr-HR",
+        "publisher": {"@id": "https://libra.mateolabs.dev/#business"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://libra.mateolabs.dev/#webpage",
+        "url": "https://libra.mateolabs.dev/",
+        "name": "Bager iskopi i kopanje Labin, Istra | LIBRA",
+        "description": "Bager iskopi i kopanje bagerom za temelje, bazene, kanale, drenažu i pripremu terena u Labinu i cijeloj Istri.",
+        "inLanguage": "hr-HR",
+        "isPartOf": {"@id": "https://libra.mateolabs.dev/#website"},
+        "about": {"@id": "https://libra.mateolabs.dev/#business"},
+        "primaryImageOfPage": {"@type": "ImageObject", "url": "https://libra.mateolabs.dev/assets/images/bager-iskopi-labin-hero.png", "width": 1832, "height": 1024}
+      }
+    ]
   }
   </script>
 </head>
@@ -123,15 +159,15 @@
       <div class="shell">
         <div class="section-head reveal">
           <div><p class="eyebrow light"><span></span> Usluge</p><h2 id="services-title">Što radimo</h2></div>
-          <p>Pošaljite lokaciju i kratak opis radova. Brzo ćemo procijeniti pristup, opseg radova i sljedeći korak.</p>
+          <p>Izvodimo bager iskope i kopanje bagerom za privatne, građevinske i infrastrukturne radove. Pošaljite lokaciju i kratak opis posla.</p>
         </div>
         <div class="service-grid">
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-foundation"/></svg><h3>Iskopi temelja</h3><p>Iskop građevinske jame i temeljnih traka prema mjerama projekta, uz urednu pripremu podloge za nastavak gradnje.</p></article>
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-load"/></svg><h3>Prijevoz materijala</h3><p>Dovoz rasutog i građevinskog materijala te odvoz zemlje i kamena kiperom, prema potrebama gradilišta.</p></article>
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-level"/></svg><h3>Zemljani radovi</h3><p>Grubo i završno ravnanje, nasipavanje i oblikovanje parcele kako bi teren bio spreman za gradnju.</p></article>
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-access"/></svg><h3>Izgradnja pristupnih putova</h3><p>Formiranje, nasipavanje i zbijanje makadamskih prilaza za siguran pristup kućama, parcelama i gradilištima.</p></article>
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-channel"/></svg><h3>Kanalizacija i drenaža</h3><p>Strojni iskop kanala za odvodnju i instalacije, s pripremom trase za sigurno polaganje cijevi.</p></article>
-          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-clear"/></svg><h3>Uređenje okućnica</h3><p>Oblikovanje dvorišta, terasa i vanjskih površina — od skidanja viška zemlje do završnog niveliranja.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/iskopi-temelja.jpg" width="900" height="600" loading="lazy" alt="Iskop temelja bagerom"><svg aria-hidden="true"><use href="#i-foundation"/></svg><h3>Iskopi temelja i bazena</h3><p>Iskop građevinske jame, temeljnih traka ili bazena prema mjerama projekta, uz urednu pripremu podloge za nastavak radova.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/prijevoz-materijala.jpg" width="900" height="600" loading="lazy" alt="Prijevoz zemlje i građevinskog materijala kiperom"><svg aria-hidden="true"><use href="#i-load"/></svg><h3>Prijevoz materijala</h3><p>Dovoz rasutog i građevinskog materijala te odvoz zemlje i kamena kiperom, prema potrebama gradilišta.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/zemljani-radovi.jpg" width="900" height="600" loading="lazy" alt="Zemljani radovi i priprema terena bagerom"><svg aria-hidden="true"><use href="#i-level"/></svg><h3>Zemljani radovi</h3><p>Grubo i završno ravnanje, nasipavanje i oblikovanje parcele kako bi teren bio spreman za gradnju.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/pristupni-putovi.jpg" width="900" height="600" loading="lazy" alt="Izgradnja makadamskog pristupnog puta"><svg aria-hidden="true"><use href="#i-access"/></svg><h3>Izgradnja pristupnih putova</h3><p>Formiranje, nasipavanje i zbijanje makadamskih prilaza za siguran pristup kućama, parcelama i gradilištima.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/kanalizacija-drenaza.jpg" width="900" height="600" loading="lazy" alt="Strojni iskop kanala za kanalizaciju i drenažu"><svg aria-hidden="true"><use href="#i-channel"/></svg><h3>Kanalizacija i drenaža</h3><p>Strojni iskop kanala za odvodnju i instalacije, s pripremom trase za sigurno polaganje cijevi.</p></article>
+          <article class="service-card reveal" tabindex="0"><img class="service-card-image" src="/assets/images/services/uredenje-okucnica.jpg" width="900" height="600" loading="lazy" alt="Uređenje okućnice i ravnanje terena"><svg aria-hidden="true"><use href="#i-clear"/></svg><h3>Uređenje okućnica</h3><p>Oblikovanje dvorišta, terasa i vanjskih površina — od skidanja viška zemlje do završnog niveliranja.</p></article>
         </div>
         <a class="services-contact reveal" href="#kontakt">Trebate drugi tip iskopa? <strong>Pošaljite upit</strong><svg><use href="#i-arrow"/></svg></a>
       </div>
@@ -142,7 +178,7 @@
         <div class="area-copy reveal">
           <p class="eyebrow"><span></span> Područje rada</p>
           <h2 id="area-title">Labin<br>i cijela Istra</h2>
-          <p>LIBRA je lokalni obrt za iskope i pripremu terena sa sjedištem u Labinu.</p>
+          <p>LIBRA je lokalni obrt za bager iskope, zemljane radove i pripremu terena sa sjedištem u Labinu. Radove izvodimo na području Labina, Rapca, Raše, Kršana, Pićna i prema dogovoru diljem Istre.</p>
           <ul class="area-facts">
             <li><strong>Sjedište u Labinu</strong></li>
             <li><strong>Rad na području cijele Istre</strong></li>
@@ -160,6 +196,22 @@
             <path class="map-pointer" d="m385 318 53-23"/>
             <text class="map-labin-label" x="445" y="295">LABIN</text>
           </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="seo-details section-pad" aria-labelledby="seo-details-title">
+      <div class="shell seo-details-grid">
+        <div class="seo-details-intro reveal">
+          <p class="eyebrow"><span></span> Bager iskopi</p>
+          <h2 id="seo-details-title">Kopanje i priprema terena</h2>
+          <p>Strojne iskope dogovaramo prema vrsti tla, pristupu bageru, lokaciji i opsegu radova. Za početnu procjenu pošaljite što preciznije podatke o zahvatu.</p>
+        </div>
+        <div class="seo-faq reveal">
+          <article><h3>Koje vrste iskopa izvodite?</h3><p>Iskope temelja i bazena, kanale za instalacije, kanalizaciju i drenažu, pripremu terena, ravnanje parcela te radove na pristupnim putovima i okućnicama.</p></article>
+          <article><h3>Gdje izvodite bager radove?</h3><p>Polazna lokacija je Labin, a radove dogovaramo na području Labinštine i cijele Istre, ovisno o pristupu stroju i opsegu posla.</p></article>
+          <article><h3>Kako zatražiti procjenu iskopa?</h3><p>Pošaljite lokaciju, vrstu iskopa, približne dimenzije i opis pristupa terenu. Fotografije lokacije možete poslati putem WhatsAppa.</p></article>
+          <article><h3>Možete li odvesti iskopani materijal?</h3><p>Da, prema dogovoru organiziramo odvoz viška zemlje i kamena te dovoz potrebnog rasutog ili građevinskog materijala kiperom.</p></article>
         </div>
       </div>
     </section>
