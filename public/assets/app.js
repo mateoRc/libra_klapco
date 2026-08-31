@@ -89,6 +89,7 @@
     document.querySelectorAll('[data-email-text]').forEach(node => { node.textContent = config.email; });
   }
   if (config.whatsapp) {
+    root.classList.add('has-whatsapp');
     document.querySelectorAll('[data-whatsapp-link]').forEach(link => {
       link.href = `https://wa.me/${cleanPhone(config.whatsapp).replace('+', '')}`;
       link.classList.remove('is-hidden');

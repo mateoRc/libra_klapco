@@ -220,3 +220,26 @@ h3{font-weight:600;line-height:1}
   .area-map,.area-map svg{min-height:300px;height:300px}
   .site-footer{padding-top:52px}
 }
+
+
+/* Service photography appears only when a card is explored. */
+.service-grid{grid-template-columns:repeat(3,1fr)}
+.service-card{isolation:isolate}
+.service-card:before{content:"";position:absolute;z-index:0;inset:0;background-image:linear-gradient(180deg,rgba(15,16,14,.48),rgba(15,16,14,.92)),var(--service-image);background-position:center;background-size:cover;opacity:0;transform:scale(1.045);transition:opacity .35s ease,transform .65s var(--ease)}
+.service-card:hover:before{opacity:1;transform:scale(1)}
+.service-card:after{z-index:3}
+.service-card>*{z-index:2}
+.service-card:nth-child(1){--service-image:url("/assets/images/services/iskopi-temelja.jpg")}
+.service-card:nth-child(2){--service-image:url("/assets/images/services/prijevoz-materijala.jpg")}
+.service-card:nth-child(3){--service-image:url("/assets/images/services/zemljani-radovi.jpg")}
+.service-card:nth-child(4){--service-image:url("/assets/images/services/pristupni-putovi.jpg")}
+.service-card:nth-child(5){--service-image:url("/assets/images/services/kanalizacija-drenaza.jpg")}
+.service-card:nth-child(6){--service-image:url("/assets/images/services/uredenje-okucnica.jpg")}
+.service-card:hover p{color:rgba(255,255,255,.84)}
+.whatsapp-float{position:fixed;z-index:94;right:88px;bottom:22px;display:flex;align-items:center;gap:13px;min-height:54px;padding:0 19px;border:1px solid rgba(255,255,255,.22);background:#25d366;color:#102217;box-shadow:0 12px 34px rgba(0,0,0,.28);font-size:12px;letter-spacing:.04em;transition:transform .25s var(--ease),background .2s}
+.whatsapp-float:before{content:"";width:9px;height:9px;border:2px solid currentColor;border-radius:50%}
+.whatsapp-float span{font-weight:700}
+.whatsapp-float strong{font-size:12px}
+.whatsapp-float:hover{transform:translateY(-3px);background:#38df77}
+@media(max-width:1050px){.service-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.service-grid{grid-template-columns:1fr}.whatsapp-float{left:18px;right:18px;bottom:max(14px,env(safe-area-inset-bottom));justify-content:space-between}.has-whatsapp .back-top{bottom:82px}.has-whatsapp .site-footer{padding-bottom:104px}}
