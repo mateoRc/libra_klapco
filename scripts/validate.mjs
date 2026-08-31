@@ -60,5 +60,6 @@ if (!styles.includes('prefers-reduced-motion')) throw new Error('Reduced-motion 
 if (!styles.includes('.service-card:is(:hover,:focus-visible,.is-active)')) throw new Error('Service-card mobile image state is missing.');
 if (!app.includes("matchMedia('(hover: none), (pointer: coarse)')")) throw new Error('Service-card touch handling is missing.');
 if (!app.includes("history.replaceState(null, '', location.pathname + location.search)")) throw new Error('Header logo scroll-to-top handling is missing.');
+if (!app.includes('syncTranslatedNode(document.body, translatedDocument.body)')) throw new Error('In-place language switching is missing.');
 
 console.log(`Validated HR/EN static pages, localized forms, SEO metadata, headers and ${new Set(referenced).size} referenced assets.`);

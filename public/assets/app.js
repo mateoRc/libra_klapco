@@ -3,8 +3,7 @@
 
   const root = document.documentElement;
   const config = window.LIBRA_CONFIG || {};
-  const isEnglish = root.lang === 'en';
-  const copy = isEnglish ? {
+  const getCopy = () => root.lang === 'en' ? {
     invalidForm: 'Check the highlighted fields and consent.',
     sending: 'Sending inquiry…',
     unconfigured: 'The form is not connected to an email address yet. Please contact us directly.',
@@ -25,6 +24,7 @@
     success: 'Hvala! Vaš upit je poslan. Javit ćemo vam se u vezi s radovima.',
     genericError: 'Upit trenutačno nije moguće poslati.'
   };
+  let copy = getCopy();
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const intro = document.querySelector('.intro');
   if (intro && reducedMotion) {
@@ -75,6 +75,77 @@
       closeMenu();
       history.replaceState(null, '', location.pathname + location.search);
       scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+    });
+  });
+
+  const syncTranslatedNode = (current, translated) => {
+    if (!current || !translated || current.nodeType !== translated.nodeType) return;
+    if (current.nodeType === Node.TEXT_NODE) {
+      current.nodeValue = translated.nodeValue;
+      return;
+    }
+    if (current.nodeType !== Node.ELEMENT_NODE) return;
+    if (current.matches('[data-year],[data-phone-text],.form-status')) return;
+
+    ['aria-label', 'placeholder', 'lang'].forEach(attribute => {
+      if (translated.hasAttribute(attribute)) current.setAttribute(attribute, translated.getAttribute(attribute));
+      else current.removeAttribute(attribute);
+    });
+    if (current.matches('a:not([data-phone-link]):not([data-email-link]):not([data-whatsapp-link])')) {
+      current.setAttribute('href', translated.getAttribute('href'));
+    }
+    if (translated.hasAttribute('aria-current')) current.setAttribute('aria-current', translated.getAttribute('aria-current'));
+    else current.removeAttribute('aria-current');
+
+    const currentChildren = [...current.childNodes];
+    const translatedChildren = [...translated.childNodes];
+    if (currentChildren.length !== translatedChildren.length) return;
+    currentChildren.forEach((child, index) => syncTranslatedNode(child, translatedChildren[index]));
+  };
+
+  const applyLanguageDocument = (translatedDocument, targetUrl) => {
+    document.querySelector('.intro')?.remove();
+    translatedDocument.querySelector('.intro')?.remove();
+    syncTranslatedNode(document.body, translatedDocument.body);
+    root.lang = translatedDocument.documentElement.lang;
+    root.classList.remove('intro-on', 'language-changing');
+    document.title = translatedDocument.title;
+
+    const translatedDescription = translatedDocument.querySelector('meta[name="description"]');
+    const currentDescription = document.querySelector('meta[name="description"]');
+    if (translatedDescription && currentDescription) currentDescription.content = translatedDescription.content;
+    const translatedCanonical = translatedDocument.querySelector('link[rel="canonical"]');
+    const currentCanonical = document.querySelector('link[rel="canonical"]');
+    if (translatedCanonical && currentCanonical) currentCanonical.href = translatedCanonical.href;
+    document.querySelectorAll('meta[property^="og:"]').forEach(meta => {
+      const translatedMeta = translatedDocument.querySelector(`meta[property="${meta.getAttribute('property')}"]`);
+      if (translatedMeta) meta.content = translatedMeta.content;
+    });
+    const translatedStructuredData = translatedDocument.querySelector('script[type="application/ld+json"]');
+    const currentStructuredData = document.querySelector('script[type="application/ld+json"]');
+    if (translatedStructuredData && currentStructuredData) currentStructuredData.textContent = translatedStructuredData.textContent;
+
+    copy = getCopy();
+    history.replaceState(null, '', targetUrl.pathname + targetUrl.search + targetUrl.hash);
+  };
+
+  document.querySelectorAll('.language-switch a').forEach(link => {
+    link.addEventListener('click', async event => {
+      event.preventDefault();
+      if (link.hasAttribute('aria-current')) return;
+      closeMenu();
+      root.classList.add('language-changing');
+      const targetUrl = new URL(link.href, location.href);
+      try {
+        const response = await fetch(targetUrl, { headers: { Accept: 'text/html' } });
+        if (!response.ok) throw new Error(`Language request failed: ${response.status}`);
+        const translatedDocument = new DOMParser().parseFromString(await response.text(), 'text/html');
+        const apply = () => applyLanguageDocument(translatedDocument, targetUrl);
+        if (document.startViewTransition && !reducedMotion) document.startViewTransition(apply);
+        else apply();
+      } catch (error) {
+        location.assign(targetUrl.href);
+      }
     });
   });
 
