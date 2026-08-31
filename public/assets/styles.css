@@ -256,7 +256,7 @@ h3{font-weight:600;line-height:1}
 .whatsapp-float{right:80px;bottom:20px;min-height:44px;padding:0 14px;gap:9px;font-size:11px}
 .whatsapp-float:before{width:7px;height:7px;border-width:1.5px}
 .whatsapp-float strong{font-size:11px}
-.whatsapp-icon{display:none;width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.whatsapp-icon{display:none;width:34px;height:34px;fill:currentColor;stroke:none}
 .whatsapp-float{width:46px;height:46px;min-height:46px;padding:0;justify-content:center;border-radius:50%}
 .whatsapp-float:before,.whatsapp-float span,.whatsapp-float strong{display:none}
 .whatsapp-icon{display:block}
