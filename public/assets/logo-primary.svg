@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 58" role="img" aria-labelledby="title desc">
-  <title id="title">LIBRA</title><desc id="desc">Simbol vage oblikovan rukom bagera iznad linije tla</desc>
-  <g fill="none" stroke="#191a18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 42h54"/><path d="M12 36c7-20 28-24 38-8 3 5 8 8 15 8"/><path fill="#c98a2e" stroke="#c98a2e" d="m64 32 1 12 13 1 6-8-20-5Z"/>
-  </g>
-  <text x="95" y="42" fill="#191a18" font-family="Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="4">LIBRA</text>
-</svg>

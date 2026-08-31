@@ -27,7 +27,7 @@ for (const page of [html, englishHtml]) {
   for (const marker of [
     'hreflang="hr"', 'hreflang="en"', 'hreflang="x-default"', 'class="language-switch"',
     "classList.add('intro-on')", 'class="intro"', 'data-scroll-top', 'tabindex="0"',
-    'src="/assets/logo-light.svg"'
+    'src="/assets/libra_logo.png"'
   ]) {
     if (!page.includes(marker)) throw new Error(`Multilingual page is missing required marker: ${marker}`);
   }

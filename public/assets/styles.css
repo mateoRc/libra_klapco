@@ -252,14 +252,16 @@ h3{font-weight:600;line-height:1}
 .service-card:focus-visible{outline:2px solid var(--ochre);outline-offset:-2px}
 .area-facts li{grid-template-columns:1fr}
 .site-footer{background:#41453f}
-.footer-brand-mark{width:200px;height:58px}
+.footer-brand-mark{width:180px;height:101px}
 .whatsapp-float{right:80px;bottom:20px;min-height:44px;padding:0 14px;gap:9px;font-size:11px}
 .whatsapp-float:before{width:7px;height:7px;border-width:1.5px}
 .whatsapp-float strong{font-size:11px}
+.whatsapp-icon{display:none;width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:760px){
-  .footer-brand-mark{width:180px;height:48px}
-  .whatsapp-float{left:14px;right:auto;bottom:max(12px,env(safe-area-inset-bottom));min-height:42px;padding:0 13px;justify-content:flex-start}
-  .whatsapp-float strong{display:none}
+  .footer-brand-mark{width:154px;height:87px}
+  .whatsapp-float{left:14px;right:auto;bottom:max(12px,env(safe-area-inset-bottom));width:44px;height:44px;min-height:44px;padding:0;justify-content:center;border-radius:50%}
+  .whatsapp-float:before,.whatsapp-float span,.whatsapp-float strong{display:none}
+  .whatsapp-icon{display:block}
   .has-whatsapp .back-top{bottom:max(12px,env(safe-area-inset-bottom))}
   .has-whatsapp .site-footer{padding-bottom:80px}
   .has-mobile-call .whatsapp-float{bottom:76px}
