@@ -11,6 +11,7 @@ const englishPrivacy = await readFile(resolve(publicDir, 'en/privacy.html'), 'ut
 const config = await readFile(resolve(publicDir, 'config.js'), 'utf8');
 const headers = await readFile(resolve(publicDir, '_headers'), 'utf8');
 const styles = await readFile(resolve(publicDir, 'assets/styles.css'), 'utf8');
+const app = await readFile(resolve(publicDir, 'assets/app.js'), 'utf8');
 const required = [
   '<html lang="hr">', '<h1', 'application/ld+json', 'rel="canonical"',
   'data-phone-link', 'id="usluge"', 'id="podrucje"', 'id="kontakt"',
@@ -23,8 +24,15 @@ for (const marker of ['<html lang="en">', 'https://libra.mateolabs.dev/en/', 'La
   if (!englishHtml.includes(marker)) throw new Error(`English page is missing required marker: ${marker}`);
 }
 for (const page of [html, englishHtml]) {
-  for (const marker of ['hreflang="hr"', 'hreflang="en"', 'hreflang="x-default"', 'class="language-switch"']) {
+  for (const marker of [
+    'hreflang="hr"', 'hreflang="en"', 'hreflang="x-default"', 'class="language-switch"',
+    "classList.add('intro-on')", 'class="intro"', 'data-scroll-top', 'tabindex="0"',
+    'src="/assets/logo-light.svg"'
+  ]) {
     if (!page.includes(marker)) throw new Error(`Multilingual page is missing required marker: ${marker}`);
+  }
+  for (const removedMarker of ['class="service-number"', '01 —', '02 —', '03 —']) {
+    if (page.includes(removedMarker)) throw new Error(`Homepage still contains removed numbering: ${removedMarker}`);
   }
 }
 
@@ -49,5 +57,8 @@ if (!config.includes('https://formsubmit.co/ajax/')) throw new Error('Static ema
 if (!headers.includes('https://formsubmit.co')) throw new Error('Cloudflare CSP does not allow the form endpoint.');
 if (!headers.includes('/assets/fonts/*')) throw new Error('Immutable font caching policy is missing.');
 if (!styles.includes('prefers-reduced-motion')) throw new Error('Reduced-motion styles are missing.');
+if (!styles.includes('.service-card:is(:hover,:focus-visible,.is-active)')) throw new Error('Service-card mobile image state is missing.');
+if (!app.includes("matchMedia('(hover: none), (pointer: coarse)')")) throw new Error('Service-card touch handling is missing.');
+if (!app.includes("history.replaceState(null, '', location.pathname + location.search)")) throw new Error('Header logo scroll-to-top handling is missing.');
 
 console.log(`Validated HR/EN static pages, localized forms, SEO metadata, headers and ${new Set(referenced).size} referenced assets.`);

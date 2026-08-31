@@ -22,6 +22,7 @@
   <link rel="icon" href="/assets/libra_logo.png" type="image/png">
   <link rel="preload" href="/assets/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script>document.documentElement.classList.add('intro-on');</script>
   <link rel="stylesheet" href="/assets/styles.css">
   <script type="application/ld+json">
   {
@@ -57,6 +58,14 @@
   </script>
 </head>
 <body>
+  <div class="intro" aria-hidden="true">
+    <div class="intro-lockup">
+      <span class="intro-logo-wrap"><img src="/assets/libra_logo.png" width="1672" height="941" alt=""></span>
+      <i class="intro-track"></i>
+      <strong>LIBRA</strong>
+      <small>ZEMLJANI RADOVI · LABIN · ISTRA</small>
+    </div>
+  </div>
   <a class="skip-link" href="#sadrzaj">Preskoči na sadržaj</a>
 
   <svg class="svg-sprite" aria-hidden="true">
@@ -73,7 +82,7 @@
 
   <header class="site-header" data-header>
     <div class="shell header-inner">
-      <a class="brand" href="/" aria-label="LIBRA — početna">
+      <a class="brand" href="/" data-scroll-top aria-label="LIBRA — povratak na vrh">
         <span class="brand-word">LIBRA</span>
       </a>
       <nav class="desktop-nav" aria-label="Glavna navigacija">
@@ -113,16 +122,16 @@
     <section class="services section-pad" id="usluge" aria-labelledby="services-title">
       <div class="shell">
         <div class="section-head reveal">
-          <div><p class="eyebrow light"><span></span> 01 — Usluge</p><h2 id="services-title">Što radimo</h2></div>
+          <div><p class="eyebrow light"><span></span> Usluge</p><h2 id="services-title">Što radimo</h2></div>
           <p>Pošaljite lokaciju i kratak opis radova. Brzo ćemo procijeniti pristup, opseg radova i sljedeći korak.</p>
         </div>
         <div class="service-grid">
-          <article class="service-card reveal"><span class="service-number">01</span><svg aria-hidden="true"><use href="#i-foundation"/></svg><h3>Iskopi temelja</h3><p>Iskop građevinske jame i temeljnih traka prema mjerama projekta, uz urednu pripremu podloge za nastavak gradnje.</p></article>
-          <article class="service-card reveal"><span class="service-number">02</span><svg aria-hidden="true"><use href="#i-load"/></svg><h3>Prijevoz materijala</h3><p>Dovoz rasutog i građevinskog materijala te odvoz zemlje i kamena kiperom, prema potrebama gradilišta.</p></article>
-          <article class="service-card reveal"><span class="service-number">03</span><svg aria-hidden="true"><use href="#i-level"/></svg><h3>Zemljani radovi</h3><p>Grubo i završno ravnanje, nasipavanje i oblikovanje parcele kako bi teren bio spreman za gradnju.</p></article>
-          <article class="service-card reveal"><span class="service-number">04</span><svg aria-hidden="true"><use href="#i-access"/></svg><h3>Izgradnja pristupnih putova</h3><p>Formiranje, nasipavanje i zbijanje makadamskih prilaza za siguran pristup kućama, parcelama i gradilištima.</p></article>
-          <article class="service-card reveal"><span class="service-number">05</span><svg aria-hidden="true"><use href="#i-channel"/></svg><h3>Kanalizacija i drenaža</h3><p>Strojni iskop kanala za odvodnju i instalacije, s pripremom trase za sigurno polaganje cijevi.</p></article>
-          <article class="service-card reveal"><span class="service-number">06</span><svg aria-hidden="true"><use href="#i-clear"/></svg><h3>Uređenje okućnica</h3><p>Oblikovanje dvorišta, terasa i vanjskih površina — od skidanja viška zemlje do završnog niveliranja.</p></article>
+          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-foundation"/></svg><h3>Iskopi temelja</h3><p>Iskop građevinske jame i temeljnih traka prema mjerama projekta, uz urednu pripremu podloge za nastavak gradnje.</p></article>
+          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-load"/></svg><h3>Prijevoz materijala</h3><p>Dovoz rasutog i građevinskog materijala te odvoz zemlje i kamena kiperom, prema potrebama gradilišta.</p></article>
+          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-level"/></svg><h3>Zemljani radovi</h3><p>Grubo i završno ravnanje, nasipavanje i oblikovanje parcele kako bi teren bio spreman za gradnju.</p></article>
+          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-access"/></svg><h3>Izgradnja pristupnih putova</h3><p>Formiranje, nasipavanje i zbijanje makadamskih prilaza za siguran pristup kućama, parcelama i gradilištima.</p></article>
+          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-channel"/></svg><h3>Kanalizacija i drenaža</h3><p>Strojni iskop kanala za odvodnju i instalacije, s pripremom trase za sigurno polaganje cijevi.</p></article>
+          <article class="service-card reveal" tabindex="0"><svg aria-hidden="true"><use href="#i-clear"/></svg><h3>Uređenje okućnica</h3><p>Oblikovanje dvorišta, terasa i vanjskih površina — od skidanja viška zemlje do završnog niveliranja.</p></article>
         </div>
         <a class="services-contact reveal" href="#kontakt">Trebate drugi tip iskopa? <strong>Pošaljite upit</strong><svg><use href="#i-arrow"/></svg></a>
       </div>
@@ -131,13 +140,13 @@
     <section class="area section-pad" id="podrucje" aria-labelledby="area-title">
       <div class="shell area-grid">
         <div class="area-copy reveal">
-          <p class="eyebrow"><span></span> 02 — Područje rada</p>
+          <p class="eyebrow"><span></span> Područje rada</p>
           <h2 id="area-title">Labin<br>i cijela Istra</h2>
           <p>LIBRA je lokalni obrt za iskope i pripremu terena sa sjedištem u Labinu.</p>
           <ul class="area-facts">
-            <li><span>01</span><strong>Sjedište u Labinu</strong></li>
-            <li><span>02</span><strong>Rad na području cijele Istre</strong></li>
-            <li><span>03</span><strong>Procjena prema lokaciji i pristupu</strong></li>
+            <li><strong>Sjedište u Labinu</strong></li>
+            <li><strong>Rad na području cijele Istre</strong></li>
+            <li><strong>Procjena prema lokaciji i pristupu</strong></li>
           </ul>
           <a class="text-link" href="#kontakt">Provjerite mogućnost dolaska <svg><use href="#i-arrow"/></svg></a>
         </div>
@@ -158,7 +167,7 @@
     <section class="contact section-pad" id="kontakt" aria-labelledby="contact-title">
       <div class="shell contact-grid">
         <div class="contact-intro reveal">
-          <p class="eyebrow"><span></span> 03 — Kontakt</p>
+          <p class="eyebrow"><span></span> Kontakt</p>
           <h2 id="contact-title">Javite nam se.</h2>
           <p>Pošaljite lokaciju i kratak opis radova. Javit ćemo se radi procjene i dogovora termina.</p>
           <div class="contact-details">
@@ -183,7 +192,7 @@
 
   <footer class="site-footer">
     <div class="shell footer-top">
-      <div class="footer-brand"><span class="footer-brand-mark"><img src="/assets/libra_logo.png" width="1672" height="941" alt=""></span><strong>LIBRA</strong></div>
+      <div class="footer-brand"><span class="footer-brand-mark"><img src="/assets/logo-light.svg" width="220" height="58" alt="LIBRA"></span></div>
       <p>Precizno. Pouzdano.<br>Bez komplikacija.</p>
     </div>
     <div class="shell footer-bottom">

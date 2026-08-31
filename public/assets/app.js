@@ -26,6 +26,17 @@
     genericError: 'Upit trenutačno nije moguće poslati.'
   };
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const intro = document.querySelector('.intro');
+  if (intro && reducedMotion) {
+    intro.remove();
+    root.classList.remove('intro-on');
+  } else {
+    intro?.addEventListener('animationend', event => {
+      if (event.target !== intro || event.animationName !== 'intro-curtain') return;
+      intro.remove();
+      root.classList.remove('intro-on');
+    });
+  }
   const header = document.querySelector('[data-header]');
   const updateScrollUi = () => {
     header?.classList.toggle('compact', scrollY > 36);
@@ -58,6 +69,15 @@
   });
   addEventListener('resize', () => { if (innerWidth > 1050) closeMenu(); }, { passive: true });
 
+  document.querySelectorAll('[data-scroll-top]').forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      closeMenu();
+      history.replaceState(null, '', location.pathname + location.search);
+      scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+    });
+  });
+
   if ('IntersectionObserver' in window && !reducedMotion) {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -70,6 +90,35 @@
     document.querySelectorAll('.reveal').forEach(item => observer.observe(item));
   } else {
     document.querySelectorAll('.reveal').forEach(item => item.classList.add('visible'));
+  }
+
+  const serviceCards = [...document.querySelectorAll('.service-card')];
+  const setActiveService = activeCard => {
+    serviceCards.forEach(card => card.classList.toggle('is-active', card === activeCard));
+  };
+  if (serviceCards.length && matchMedia('(hover: none), (pointer: coarse)').matches) {
+    serviceCards.forEach(card => {
+      card.addEventListener('pointerup', () => setActiveService(card));
+      card.addEventListener('focus', () => setActiveService(card));
+    });
+    if ('IntersectionObserver' in window) {
+      const centeredCards = new Set();
+      const serviceObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) centeredCards.add(entry.target);
+          else centeredCards.delete(entry.target);
+        });
+        const viewportCenter = innerHeight / 2;
+        const centered = [...centeredCards].sort((a, b) => {
+          const aBox = a.getBoundingClientRect();
+          const bBox = b.getBoundingClientRect();
+          return Math.abs(aBox.top + aBox.height / 2 - viewportCenter)
+            - Math.abs(bBox.top + bBox.height / 2 - viewportCenter);
+        })[0];
+        setActiveService(centered || null);
+      }, { rootMargin: '-36% 0px -36% 0px', threshold: 0 });
+      serviceCards.forEach(card => serviceObserver.observe(card));
+    }
   }
 
   const cleanPhone = value => String(value || '').replace(/[^+\d]/g, '');
