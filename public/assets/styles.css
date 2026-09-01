@@ -287,3 +287,9 @@ h3{font-weight:600;line-height:1}
   .seo-faq article{grid-template-columns:1fr;gap:10px;padding:23px 0}
   .seo-faq h3{font-size:22px}
 }
+
+@media(max-width:760px){
+  :root{--shell:calc(100vw - 48px)}
+  .hero h1{max-width:calc(100% - 12px);font-size:clamp(38px,10.5vw,50px);overflow-wrap:anywhere}
+  .footer-top{row-gap:40px}
+}
