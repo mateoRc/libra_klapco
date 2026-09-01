@@ -290,6 +290,7 @@ h3{font-weight:600;line-height:1}
 
 @media(max-width:760px){
   :root{--shell:calc(100vw - 48px)}
+  .hero-content{width:var(--shell)}
   .hero h1{max-width:calc(100% - 12px);font-size:clamp(38px,10.5vw,50px);overflow-wrap:anywhere}
   .footer-top{row-gap:40px}
 }
